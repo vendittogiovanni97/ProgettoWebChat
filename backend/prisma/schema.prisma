@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
+
+enum ChannelType {
+  TEXT
+  VOICE
+}
+
+enum MemberRole {
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+enum UserStatus {
+  ONLINE
+  OFFLINE
+  AWAY
+  DO_NOT_DISTURB
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstname String?     @db.VarChar(10)
+  lastname  String?     @db.VarChar(10)
+  username  String      @unique
+  email     String      @unique
+  password  String
+  avatar    String?
+  status    UserStatus? @default(OFFLINE)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relazioni
+  ownedServers         Server[]
+  channelMessages      ChannelMessage[]
+  sentMessages         DirectMessage[]  @relation("SentMessages")
+  receivedMessages     DirectMessage[]  @relation("ReceivedMessages")
+  serverMemberships    ServerMember[]
+  friendshipsInitiated Friendship[]     @relation("UserFriendships")
+  friendshipsReceived  Friendship[]     @relation("FriendFriendships")
+
+  @@map("users")
+}
+
+model Server {
+  id        Int      @id @default(autoincrement())
+  name      String
+  icon      String?
+  ownerId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relazioni
+  owner    User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  channels Channel[]
+  members  ServerMember[]
+
+  @@index([ownerId])
+  @@map("servers")
+}
+
+model Channel {
+  id        Int         @id @default(autoincrement())
+  name      String
+  type      ChannelType
+  serverId  Int
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relazioni
+  server   Server           @relation(fields: [serverId], references: [id], onDelete: Cascade)
+  messages ChannelMessage[]
+
+  @@index([serverId])
+  @@map("channels")
+}
+
+model ServerMember {
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  serverId Int
+  role     MemberRole @default(MEMBER)
+  nickname String?
+  joinedAt DateTime   @default(now())
+
+  // Relazioni
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  server Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, serverId])
+  @@index([userId])
+  @@index([serverId])
+  @@map("server_members")
+}
+
+model DirectMessage {
+  id         Int      @id @default(autoincrement())
+  content    String   @db.Text
+  senderId   Int
+  receiverId Int
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relazioni
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@map("direct_messages")
+}
+
+model ChannelMessage {
+  id        Int      @id @default(autoincrement())
+  content   String   @db.Text
+  userId    Int
+  channelId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relazioni
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([channelId])
+  @@map("channel_messages")
+}
+
+model Friendship {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  friendId  Int
+  status    FriendshipStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relazioni
+  user   User @relation("UserFriendships", fields: [userId], references: [id], onDelete: Cascade)
+  friend User @relation("FriendFriendships", fields: [friendId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, friendId])
+  @@index([userId])
+  @@index([friendId])
+  @@map("friendships")
+}
