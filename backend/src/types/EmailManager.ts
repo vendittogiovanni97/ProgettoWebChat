@@ -82,7 +82,7 @@ async function inviaEmailDiTest() {
         const emailManager = EmailManager.getInstance();
 
         const settingEmail = {
-            to: ["maggioremario96@gmail.com", "email_non_valida"],
+            to: ["maggioremario96@gmail.com", "vendittogiovanni97@hotmail.it"],
             subject: "Test email",
             text: "Questo è un test di invio email"
         };
