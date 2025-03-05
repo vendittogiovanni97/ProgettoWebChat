@@ -5,14 +5,14 @@ export type NotificationMessage = {
   timestamp: number;
 }
 
-export type NewMessage = NotificationMessage & {
+export type NewMessage = NotificationMessage & { //eventualmente da implementare enum per gestire più type
   type: 'new-message';
   content: string;
   username: string;
   userId: number;
-}
+}//eventualmente implementare recerver per avere gestione di arrey di destinatari
 
-export interface INotificationServer {
+export interface INotificationServer {    ///serve per definire metodi e proprieta che sono necessari alla classe per funzionare se no si rompe
   connect(clientId: string, userId: number, ws: WebSocket): void;
 
   sendNotification(clientId: string, message: NotificationMessage): void;

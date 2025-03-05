@@ -17,12 +17,12 @@ export class WebSocketManager {
         console.log('chiamo initialize')
         this.ws.on('connection', (ws: WebSocket) => {
             console.log('nuova connessione')
-            try {
+            try {        ////////////gestione webrtc
                 ws.on('message', (messageBuffer) => {
                     const message = JSON.parse(messageBuffer.toString())
                     console.log('messaggio ricevuto', message)
 
-                    switch (message.type) {
+                    switch (message.type) {  ////////eventualmente da implementare metodi a posto di this.stocazz
                         case 'new-user': {
                             console.log(`il type è ${message.type}`, message)
                             this.connections.set(message.username, ws)

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { SessionManager } from "../sessionData";
+import { SessionManager } from "../../sessionData";
 import { Cookie, SessionData } from "express-session";
-import dbClient from "../configuration/db.config";
+import dbClient from "../../configuration/db.config";
 import { LoginInfo } from "infoSchema";
 
 const login = async (
@@ -33,8 +33,6 @@ const login = async (
     response.status(400).json("Wrong credentials");
     return;
   }
-
-  
   request.session.id!= user.id;
   request.session.email = user.email;
   request.session.username = user.username;
@@ -47,14 +45,12 @@ const login = async (
     username: user.username,
     cookie: new Cookie(),
   };
-
+  
   // Salva la sessione
   sessionManager.createSession(sessionData);
-
-
-
-
   response.status(200).json("User logged in");
 };
 
 export default login;
+
+//tag nfg per page personale
