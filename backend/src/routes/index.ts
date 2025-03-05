@@ -3,6 +3,7 @@ import accountRoutes from "./accountRouter";
 
 const addRoutes = (app: Express) => {
   const router = Router();
+  
   accountRoutes(router);
 
   app.use("/rest", router);
