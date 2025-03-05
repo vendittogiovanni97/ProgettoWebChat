@@ -8,7 +8,9 @@ import http from 'http';
 import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
 import moment from 'moment';
-
+moment.locale('it');
+import 'moment-timezone';
+moment.tz.setDefault("Europe/Rome");
 
 dotenv.config();
 
