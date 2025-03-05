@@ -75,8 +75,7 @@ export class EmailManager {
         return this.getInstance();
     }
 }
-
-// Esempio di utilizzo
+/*
 async function inviaEmailDiTest() {
     try {
         const emailManager = EmailManager.getInstance();
@@ -101,5 +100,5 @@ async function inviaEmailDiTest() {
 
 // Chiamata alla funzione di test
 inviaEmailDiTest();
-
+*/
 export default EmailManager;
