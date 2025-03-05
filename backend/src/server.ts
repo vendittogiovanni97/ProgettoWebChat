@@ -7,23 +7,20 @@ import { addWsRoutes } from "./routes-websocket/index-websocket";
 import http from 'http';
 import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
-import moment from 'moment';
-moment.locale('it');
-import 'moment-timezone';
+import moment from "moment-timezone";
 moment.tz.setDefault("Europe/Rome");
+moment.locale("it");  
 
 dotenv.config();
 
 const port = process.env.PORT; 
-
-
 
 if (process.env.SESSION_SECRET === undefined) {
   throw new Error("Define SESSION_SECRET");
 }
 
 const app = express();
-const server = http.createServer(app);
+const server = http.createServer(app);   //da creare https
 const appws= expressWs(app);
 
 app.use((request, response, next) => {
@@ -51,16 +48,17 @@ app.use(expressSession({
     secure: false
   }
 }))
-const webSocketManager = new WebSocketManager(server);
+new WebSocketManager(server); //eliminato istnaza non usata
 
 addRoutes(app);
 addWsRoutes(app);
 
+const oggi = moment().calendar();
 
 server.listen(port, () => {
   console.log(`Server in ascolto sulla porta ${port} ${oggi}`)
 })
 
-const oggi = moment().calendar() //per formattare data 
+ //per formattare data oggi alle ore eccc
 
 //nmpi i express-fileupload / npm i n--save-dev @type/espress-fileupload

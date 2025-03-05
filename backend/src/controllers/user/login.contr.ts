@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { SessionManager } from "../sessionData";
+import { SessionManager } from "../../sessionData";
 import { Cookie, SessionData } from "express-session";
-import dbClient from "../configuration/db.config";
+import dbClient from "../../configuration/db.config";
 import { LoginInfo } from "infoSchema";
 
 const login = async (

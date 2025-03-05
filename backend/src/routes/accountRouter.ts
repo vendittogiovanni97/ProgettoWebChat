@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { register } from "../controllers/register.contr";
-import login from "../controllers/login.contr";
+import { register } from "../controllers/user/register.contr";
+import login from "../controllers/user/login.contr";
 import { checkAuth } from "../middleware/isLogginMiddleware";
-import { logout } from "../controllers/loggout";
+import { logout } from "../controllers/user/loggout";
 
 
 const accountRoutes = (app:Router) => {

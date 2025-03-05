@@ -15,7 +15,7 @@ export class EmailManager {
             secure: true, 
             auth: {
                 user: process.env.EMAIL_USER, 
-                pass: process.env.EMAIL_PASS  || "krlg vutf ozwy binw"
+                pass: process.env.EMAIL_PASS  
             }
         }); 
     }
