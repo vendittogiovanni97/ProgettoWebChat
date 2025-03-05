@@ -7,11 +7,14 @@ import { addWsRoutes } from "./routes-websocket/index-websocket";
 import http from 'http';
 import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
+import moment from 'moment';
 
 
 dotenv.config();
 
 const port = process.env.PORT; 
+
+
 
 if (process.env.SESSION_SECRET === undefined) {
   throw new Error("Define SESSION_SECRET");
@@ -53,7 +56,9 @@ addWsRoutes(app);
 
 
 server.listen(port, () => {
-  console.log(`Server in ascolto sulla porta ${port}`)
+  console.log(`Server in ascolto sulla porta ${port} ${oggi}`)
 })
+
+const oggi = moment().calendar() //per formattare data 
 
 //nmpi i express-fileupload / npm i n--save-dev @type/espress-fileupload

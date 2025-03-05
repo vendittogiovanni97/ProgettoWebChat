@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import dbClient from "../configuration/db.config";
 import { RegisterInfo } from "infoSchema";
 import { RegisterInfoSchema } from "../validation/schemaValidation";
+import { EmailManager } from "../types/EmailManager";
 
 export const register = async (
   request: Request<undefined, unknown, RegisterInfo>,
@@ -28,6 +29,28 @@ export const register = async (
       },
     });
     response.status(200).json("User registered successfully");
+
+    //////////////////////////////////////////////////////////////
+
+    async function mandaEmail() {
+        try {
+            const emailManager = EmailManager.getInstance();
+            await emailManager.sendEmail(
+                [verifiedBody.data!.email],  
+                "Mail di benvenuto", 
+                "Benvenuto nella nostra fantastica app, buon divertimento. Clicca su questo link per l'autenticazione" // Testo dell'email
+            );
+            console.log('Email inviata con successo!');
+        } catch (errore) {
+            console.error('Errore nell\'invio email:', errore);
+        }
+    }
+    mandaEmail();
+///////////////////////////////////////////////////////////
+
+
+
+
   } catch (error) {
     console.error(error);
     if (error === "P2002") {
