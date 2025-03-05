@@ -56,7 +56,7 @@ const settingEmail = {
     text: "Test email"
 };
 
-emailManager.sendEmail(
+emailManager.sendEmail(   ///invio delle mail 
     settingEmail.to, 
     settingEmail.subject, 
     settingEmail.text

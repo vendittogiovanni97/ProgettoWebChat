@@ -36,9 +36,9 @@ export const register = async (
         try {
             const emailManager = EmailManager.getInstance();
             await emailManager.sendEmail(
-                ["destinatario@example.com"],  // Array di destinatari
-                "Oggetto dell'email",          // Oggetto 
-                "Corpo del messaggio"          // Testo dell'email
+                [verifiedBody.data!.email],  
+                "Mail di benvenuto", 
+                "Benvenuto nella nostra fantastica app, buon divertimento. Clicca su questo link per l'autenticazione" // Testo dell'email
             );
             console.log('Email inviata con successo!');
         } catch (errore) {
