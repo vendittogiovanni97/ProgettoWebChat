@@ -30,14 +30,15 @@ export const register = async (
     });
     response.status(200).json("User registered successfully");
 
-    ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
    async function mandaEmail() {
         try {
             const emailManager = EmailManager.getInstance();
             await emailManager.sendEmail(
                 [verifiedBody.data!.email],  
                 "Mail di benvenuto", 
-                "Benvenuto nella nostra fantastica app, buon divertimento. Clicca su questo link per l'autenticazione" // Testo dell'email
+                "Benvenuto quest'oggi "
             );
             console.log('Email inviata con successo!');
         } catch (errore) {
@@ -45,10 +46,8 @@ export const register = async (
         }
     }
     mandaEmail();
+
 ///////////////////////////////////////////////////////////
-
-
-
 
   } catch (error) {
     console.error(error);
