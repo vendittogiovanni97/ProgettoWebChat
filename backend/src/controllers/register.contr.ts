@@ -30,8 +30,8 @@ export const register = async (
     });
     response.status(200).json("User registered successfully");
 
-    //////////////////////////////////////////////////////////////
-    async function mandaEmail() {
+    ///////////////////////////////////////////////////////////////
+   async function mandaEmail() {
         try {
             const emailManager = EmailManager.getInstance();
             await emailManager.sendEmail(
