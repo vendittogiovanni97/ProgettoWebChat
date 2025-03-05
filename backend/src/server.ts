@@ -27,7 +27,7 @@ const server = https.createServer({
   key: fs.readFileSync('../certificati/domain.key'),
   cert: fs.readFileSync('../certificati/domain.crt'),
   passphrase: "pippo"
-}, appws.app)     //verificare se funziona a posto di app
+}, appws.app)  
 
 
 app.use((request, response, next) => {

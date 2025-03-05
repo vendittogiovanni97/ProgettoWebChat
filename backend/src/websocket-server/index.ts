@@ -2,30 +2,30 @@ import { Server } from "http";
 import WebSocket from "ws";
 
 export class WebSocketManager {
-    private ws: WebSocket.Server
+    private wss: WebSocket.Server
     private connections: Map<string, WebSocket> = new Map()
     private sessions: Map<string, Set<string>> = new Map()
 
 
     constructor(server: Server) {
         console.log('istanza del webSocketManager')
-        this.ws = new WebSocket.Server({ server })
+        this.wss = new WebSocket.Server({ server })
         this.initialize()
     }
 
     public initialize() {
         console.log('chiamo initialize')
-        this.ws.on('connection', (ws: WebSocket) => {
+        this.wss.on('connection', (wss: WebSocket) => {
             console.log('nuova connessione')
             try {        ////////////gestione webrtc
-                ws.on('message', (messageBuffer) => {
+                wss.on('message', (messageBuffer) => {
                     const message = JSON.parse(messageBuffer.toString())
                     console.log('messaggio ricevuto', message)
 
                     switch (message.type) {  ////////eventualmente da implementare metodi a posto di this.stocazz
                         case 'new-user': {
                             console.log(`il type è ${message.type}`, message)
-                            this.connections.set(message.username, ws)
+                            this.connections.set(message.username, wss)
                             console.log('connessioni attive', Array.from(this.connections.keys()))
                         }
                             break
@@ -114,9 +114,9 @@ export class WebSocketManager {
     public logoutUser(username: string) {
         console.log(`Logout dell'utente ${username}`);
         // Se esiste una connessione WebSocket aperta per questo utente, la chiudiamo
-        const ws = this.connections.get(username);
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            ws.close();
+        const wss = this.connections.get(username);
+        if (wss && wss.readyState === WebSocket.OPEN) {
+            wss.close();
         }
         // Rimuoviamo la connessione dalla mappa
         this.connections.delete(username);
