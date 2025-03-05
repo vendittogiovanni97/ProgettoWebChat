@@ -4,13 +4,13 @@ import expressSession from "express-session";
 import cors from "cors";
 import expressWs from 'express-ws';
 import { addWsRoutes } from "./routes-websocket/index-websocket";
-import http from 'http';
+import https from 'https'
+import fs from "fs"
 import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
 import moment from "moment-timezone";
 moment.tz.setDefault("Europe/Rome");
 moment.locale("it");  
-
 dotenv.config();
 
 const port = process.env.PORT; 
@@ -20,14 +20,21 @@ if (process.env.SESSION_SECRET === undefined) {
 }
 
 const app = express();
-const server = http.createServer(app);   //da creare https
 const appws= expressWs(app);
+
+
+const server = https.createServer({
+  key: fs.readFileSync('../certificati/domain.key'),
+  cert: fs.readFileSync('../certificati/domain.crt'),
+  passphrase: "pippo"
+}, appws.app)     //verificare se funziona a posto di app
+
 
 app.use((request, response, next) => {
   console.log(request.method, request.url);
-
   next();
 });
+
 
 app.use(
   cors({
@@ -35,6 +42,7 @@ app.use(
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 app.use(expressSession({
@@ -48,7 +56,8 @@ app.use(expressSession({
     secure: false
   }
 }))
-new WebSocketManager(server); //eliminato istnaza non usata
+
+new WebSocketManager(server); 
 
 addRoutes(app);
 addWsRoutes(app);
