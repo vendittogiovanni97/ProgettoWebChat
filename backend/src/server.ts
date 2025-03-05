@@ -8,9 +8,8 @@ import https from 'https'
 import fs from "fs"
 import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
-import moment from "moment-timezone";
-moment.tz.setDefault("Europe/Rome");
-moment.locale("it");  
+import { oggi } from "./configuration/time.config";
+
 dotenv.config();
 
 const port = process.env.PORT; 
@@ -62,7 +61,6 @@ new WebSocketManager(server);
 addRoutes(app);
 addWsRoutes(app);
 
-const oggi = moment().calendar();
 
 server.listen(port, () => {
   console.log(`Server in ascolto sulla porta ${port} ${oggi}`)

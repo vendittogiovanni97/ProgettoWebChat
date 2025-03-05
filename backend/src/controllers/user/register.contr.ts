@@ -4,6 +4,7 @@ import dbClient from "../../configuration/db.config";
 import { RegisterInfo } from "infoSchema";
 import { RegisterInfoSchema } from "../../validation/schemaValidation";
 import { EmailManager } from "../../types/EmailManager";
+import { oggi } from "../../configuration/time.config";
 
 export const register = async (
   request: Request<undefined, unknown, RegisterInfo>,
@@ -38,7 +39,7 @@ export const register = async (
             await emailManager.sendEmail(
                 [verifiedBody.data!.email],  
                 "Mail di benvenuto", 
-                "Benvenuto quest'oggi "
+                `Benvenuto, ti sei iscritto ${oggi}` 
             );
             console.log('Email inviata con successo!');
         } catch (errore) {

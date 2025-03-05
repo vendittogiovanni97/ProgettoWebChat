@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { oggi } from '../configuration/time.config';
 
 // Carica le variabili d'ambiente
 dotenv.config();
@@ -83,7 +84,7 @@ async function inviaEmailDiTest() {
         const settingEmail = {
             to: ["maggioremario96@gmail.com", "vendittogiovanni97@hotmail.it"],
             subject: "Test email",
-            text: "Questo è un test di invio email"
+            text: `Questo è un test di invio email ${oggi}`
         };
 
         await emailManager.sendEmail(
@@ -101,4 +102,5 @@ async function inviaEmailDiTest() {
 // Chiamata alla funzione di test
 inviaEmailDiTest();
 */
+
 export default EmailManager;
