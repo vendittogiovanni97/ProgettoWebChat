@@ -76,6 +76,21 @@ export class EmailManager {
         return this.getInstance();
     }
 }
+
+export async function mandaEmail(email: string) {
+    try {
+      const emailManager = EmailManager.getInstance();
+      await emailManager.sendEmail(
+        [email],
+        "Benvenuto nella nostra applicazione",
+        `Benvenuto, ti sei iscritto ${oggi}`
+      );
+      console.log('Email di benvenuto inviata con successo!');
+    } catch (error) {
+      console.error('Errore nell\'invio email:', error);
+      // Non blocchiamo il flusso principale per errori email
+    }
+}
 /*
 async function inviaEmailDiTest() {
     try {

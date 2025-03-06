@@ -3,8 +3,10 @@ import bcrypt from "bcrypt";
 import dbClient from "../../configuration/db.config";
 import { RegisterInfo } from "infoSchema";
 import { RegisterInfoSchema } from "../../validation/schemaValidation";
-import { EmailManager } from "../../types/EmailManager";
+import { EmailManager, mandaEmail } from "../../types/EmailManager";
 import { oggi } from "../../configuration/time.config";
+import { AppError } from "errorType";
+import { ErrorCodes } from "../../constants/errorCodes";
 
 export const register = async (
   request: Request<undefined, unknown, RegisterInfo>,
@@ -16,40 +18,32 @@ export const register = async (
   const verifiedBody = RegisterInfoSchema.safeParse(body);
 
   if (verifiedBody.success === false) {
-    response.status(400).json(verifiedBody.error);
-    return;
+    throw new AppError(400, ErrorCodes.INVALID_INPUT, "Dati di registrazione");
   }
   const passwordHash = await bcrypt.hash(verifiedBody.data.password, 12);
 
   try {
-    await dbClient.user.create({
+    const newUser = await dbClient.user.create({
       data: {
         email: verifiedBody.data.email,
         username: verifiedBody.data.username,
-        password: passwordHash
+        password: passwordHash,
       },
     });
-    response.status(200).json("User registered successfully");
+    // Invia email in maniera asincrona
+    mandaEmail(verifiedBody.data.email).catch((err) =>
+      console.error("Errore nell'invio email di benvenuto:", err)
+    );
 
-///////////////////////////////////////////////////////////////
+    return response.status(200).json({
+      success: true,
+      message: "Utente registrato con successo",
+      userId: newUser.id
+    })
 
-   async function mandaEmail() {
-        try {
-            const emailManager = EmailManager.getInstance();
-            await emailManager.sendEmail(
-                [verifiedBody.data!.email],  
-                "Mail di benvenuto", 
-                `Benvenuto, ti sei iscritto ${oggi}` 
-            );
-            console.log('Email inviata con successo!');
-        } catch (errore) {
-            console.error('Errore nell\'invio email:', errore);
-        }
-    }
-    mandaEmail();
+    //////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////
-
+    ///////////////////////////////////////////////////////////
   } catch (error) {
     console.error(error);
     if (error === "P2002") {
@@ -60,3 +54,4 @@ export const register = async (
     }
   }
 };
+
