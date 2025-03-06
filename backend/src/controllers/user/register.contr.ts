@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import dbClient from "../../configuration/db.config";
 import { RegisterInfo } from "infoSchema";
 import { RegisterInfoSchema } from "../../validation/schemaValidation";
-import { EmailManager, mandaEmail } from "../../types/EmailManager";
+import { EmailManager } from "../../types/EmailManager";
 import { oggi } from "../../configuration/time.config";
 import { AppError } from "errorType";
 import { ErrorCodes } from "../../constants/errorCodes";
@@ -31,9 +31,7 @@ export const register = async (
       },
     });
     // Invia email in maniera asincrona
-    mandaEmail(verifiedBody.data.email).catch((err) =>
-      console.error("Errore nell'invio email di benvenuto:", err)
-    );
+    await EmailManager.getInstance().sendEmail([verifiedBody.data.email], "Benvenuto nella nostra applicazione",`<h1>Benvenuto, ti sei iscritto ${verifiedBody.data.username}</h1>`)
 
     return response.status(200).json({
       success: true,
