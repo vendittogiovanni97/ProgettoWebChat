@@ -4,7 +4,6 @@ import dbClient from "../../configuration/db.config";
 import { RegisterInfo } from "infoSchema";
 import { RegisterInfoSchema } from "../../validation/schemaValidation";
 import { EmailManager } from "../../types/EmailManager";
-import { oggi } from "../../configuration/time.config";
 import { AppError } from "errorType";
 import { ErrorCodes } from "../../constants/errorCodes";
 
