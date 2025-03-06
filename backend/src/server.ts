@@ -9,6 +9,7 @@ import fs from "fs"
 import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
 import { oggi } from "./configuration/time.config";
+import { errorHandler } from "./middleware/errorMiddleware";
 
 dotenv.config();
 
@@ -34,7 +35,6 @@ app.use((request, response, next) => {
   next();
 });
 
-
 app.use(
   cors({
     origin: process.env.ORIGIN,
@@ -52,7 +52,7 @@ app.use(expressSession({
   cookie: {
     maxAge: 86400000,
     sameSite: 'strict',
-    secure: false
+    secure: true
   }
 }))
 
@@ -60,6 +60,8 @@ new WebSocketManager(server);
 
 addRoutes(app);
 addWsRoutes(app);
+
+app.use(errorHandler)
 
 
 server.listen(port, () => {

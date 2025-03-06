@@ -4,13 +4,15 @@ import { SessionManager } from "../../sessionData";
 import { Cookie, SessionData } from "express-session";
 import dbClient from "../../configuration/db.config";
 import { LoginInfo } from "infoSchema";
+import { AppError } from "errorType";
+import { ErrorCodes } from "../../constants/errorCodes";
 
 const login = async (
   request: Request<undefined, unknown, LoginInfo>,
   response: Response
 ) => {
-  const {body} = request;
-  console.log('dati', body)
+  const { body } = request;
+  console.log("dati", body);
 
   const user = await dbClient.user.findUnique({
     where: {
@@ -19,21 +21,25 @@ const login = async (
   });
 
   if (user === null) {
-    response.statusMessage = "Wrong credentials";
-    response.status(400).json("Wrong credentials");
-    console.log("duestronzate")
-    return;
+    throw new AppError(
+      400,
+      ErrorCodes.INVALID_CREDENTIALS,
+      "Credenziali non valide"
+    );
   }
 
   const hashedPassword = user.password;
   const isCorrect = await bcrypt.compare(body.password, hashedPassword);
 
   if (!isCorrect) {
-    response.statusMessage = "Wrong credentials";
-    response.status(400).json("Wrong credentials");
-    return;
+    throw new AppError(
+      400,
+      ErrorCodes.INVALID_CREDENTIALS,
+      "Credenziali non valide"
+    );
   }
-  request.session.id!= user.id;
+
+  request.session.id != user.id;
   request.session.email = user.email;
   request.session.username = user.username;
 
@@ -45,10 +51,18 @@ const login = async (
     username: user.username,
     cookie: new Cookie(),
   };
-  
+
   // Salva la sessione
   sessionManager.createSession(sessionData);
-  response.status(200).json("User logged in");
+  return response.status(200).json({
+    succes: true,
+    message: "Login effetuato con successo",
+    user: {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    },
+  });
 };
 
 export default login;
