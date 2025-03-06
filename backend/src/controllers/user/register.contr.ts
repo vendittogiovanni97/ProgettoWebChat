@@ -40,15 +40,11 @@ export const register = async (
       message: "Utente registrato con successo",
       userId: newUser.id
     })
-
-    //////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////
   } catch (error) {
     console.error(error);
     if (error === "P2002") {
       // Gestione del caso di email o username duplicati
-      response.status(409).json("Email or username already exists");
+      response.status(409).json();
     } else {
       response.status(409).json("Email or username already exists");
     }
