@@ -1,16 +1,16 @@
 import { Server } from "http";
-import { WebSocketService } from "../services/WebsocketService";
+import { WebRtcSocketService } from "../services/WebRtcsocketService";
 import WebSocket from "ws";
 import WebsocketMessage from "../types/wsMessagetype";
 
 export class WebSocketManager {
   private wss: WebSocket.Server;
-  private service : WebSocketService
+  private service : WebRtcSocketService
 
   constructor(server: Server) {
     console.log("istanza del webSocketManager");
     this.wss = new WebSocket.Server({ server });
-    this.service = new WebSocketService();
+    this.service = new WebRtcSocketService();
     this.initialize();
   }
   public initialize(): void {
