@@ -54,7 +54,7 @@ const login = async (
 
   // Salva la sessione
   sessionManager.createSession(sessionData);
-  return response.status(200).json({
+   response.status(200).json({
     succes: true,
     message: "Login effetuato con successo",
     user: {
@@ -62,7 +62,9 @@ const login = async (
       username: user.username,
       email: user.email,
     },
-  });
+  });    
+  return;
+
 };
 
 export default login;
