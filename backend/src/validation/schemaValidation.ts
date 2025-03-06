@@ -1,4 +1,3 @@
-import { RegisterInfo } from "infoSchema";
 import { z } from "zod";
 
 export const LoginInfoSchema = z.object({

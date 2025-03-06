@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import dbClient from "../../configuration/db.config";
-import { RegisterInfo } from "infoSchema";
 import { RegisterInfoSchema } from "../../validation/schemaValidation";
 import { EmailManager } from "../../types/EmailManager";
-import { AppError } from "errorType";
 import { ErrorCodes } from "../../constants/errorCodes";
+import { AppError } from "../../types/errorType";
+import { RegisterInfo } from "../../types/infoSchema";
 
 export const register = async (
   request: Request<undefined, unknown, RegisterInfo>,

@@ -18,11 +18,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (data: LoginForm) => {
     console.log('data', data)
-    const { fetchResult, responseBody } = await backendFetch(
+    const { fetchResult, responseBody, responseDetails } = await backendFetch(
       "/account/login",
       "post",
       data
     );
+    console.log('details', responseDetails)
 
     if (fetchResult.ok) {
       setIsLogged(true);

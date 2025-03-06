@@ -1,6 +1,6 @@
 // errorMiddleware.ts
-import { AppError } from "errorType";
 import { Request, Response, NextFunction } from "express";
+import { AppError } from "../types/errorType";
 
 // Definisci il tipo per il middleware di errore
 type ErrorMiddleware = (

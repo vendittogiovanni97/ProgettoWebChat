@@ -1,7 +1,7 @@
 // WebSocketService.ts
 import WebSocket from "ws";
-import WebsocketMessage from "wsMessagetype";
 import { EventEmitter } from "events";
+import WebsocketMessage from "../types/wsMessagetype";
 
 export class WebSocketService extends EventEmitter {
   /*EventEmitter è una classe fornita dal modulo events di Node.js che implementa il pattern Observer (o Publish-Subscribe). Questa classe permette di:

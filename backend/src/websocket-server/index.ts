@@ -1,7 +1,7 @@
 import { Server } from "http";
 import { WebSocketService } from "../services/WebsocketService";
 import WebSocket from "ws";
-import WebsocketMessage from "wsMessagetype";
+import WebsocketMessage from "../types/wsMessagetype";
 
 export class WebSocketManager {
   private wss: WebSocket.Server;
