@@ -41,7 +41,7 @@ const login = async (
     );
   }
 
-  request.session.id != user.id;
+  request.session.id!= user.id;
   request.session.email = user.email;
   request.session.username = user.username;
 
