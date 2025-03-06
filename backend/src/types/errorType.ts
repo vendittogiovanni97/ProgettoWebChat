@@ -1,3 +1,5 @@
+import { responseStatus } from "../../src/constants/status";
+
 export interface ApiError {
   code: string;
   message: string;
@@ -9,7 +11,7 @@ export class AppError extends Error {
   code: string;
   details?: any;
 
-  constructor(statusCode: number, code: string, message: string, details?: any) {
+  constructor(statusCode: responseStatus, code: string, message: string, details?: any) {
     super(message);
     this.statusCode = statusCode;
     this.code = code;

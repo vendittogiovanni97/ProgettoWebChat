@@ -3,9 +3,11 @@ import bcrypt from "bcrypt";
 import { SessionManager } from "../../sessionData";
 import { Cookie, SessionData } from "express-session";
 import dbClient from "../../configuration/db.config";
-import { LoginInfo } from "infoSchema";
-import { AppError } from "errorType";
+import { LoginInfo } from "../../types/infoSchema";
+import { AppError } from "../../types/errorType";
 import { ErrorCodes } from "../../constants/errorCodes";
+import { responseStatus } from "../../constants/status";
+import { AppSuccess } from "../../types/succesType";
 
 const login = async (
   request: Request<undefined, unknown, LoginInfo>,
@@ -22,7 +24,7 @@ const login = async (
 
   if (user === null) {
     throw new AppError(
-      400,
+      responseStatus.BAD_REQUEST,
       ErrorCodes.INVALID_CREDENTIALS,
       "Credenziali non valide"
     );
@@ -33,7 +35,7 @@ const login = async (
 
   if (!isCorrect) {
     throw new AppError(
-      400,
+      responseStatus.BAD_REQUEST,
       ErrorCodes.INVALID_CREDENTIALS,
       "Credenziali non valide"
     );
@@ -54,15 +56,9 @@ const login = async (
 
   // Salva la sessione
   sessionManager.createSession(sessionData);
-   response.status(200).json({
-    succes: true,
-    message: "Login effetuato con successo",
-    user: {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-    },
-  });    
+
+  AppSuccess.getInstance().successResponse(response, "LOGIN_SUCCESS",responseStatus.OK, {id : user.id, username : user.username, email : user.email} )
+
   return;
 
 };
