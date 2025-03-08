@@ -1,24 +1,37 @@
 import { Server } from "http";
 import { WebRtcSocketService } from "../services/WebRtcsocketService";
-import WebSocket from "ws";
+import WebSocket, { WebSocketServer } from "ws";
 import WebsocketMessage from "../types/wsMessagetype";
+import { Request } from "express";
+import { oggi } from "../configuration/time.config";
+
 
 export class WebSocketManager {
-  private wss: WebSocket.Server;
+  private wss: WebSocketServer;
   private service : WebRtcSocketService
+  clientCounter: number;
+  clients: Map<number, any>;
 
   constructor(server: Server) {
     console.log("istanza del webSocketManager");
-    this.wss = new WebSocket.Server({ server });
+    this.wss = new WebSocket.Server({ server, path:"/" });
     this.service = new WebRtcSocketService();
+    this.clients = new Map(); //Qua mappiamo i client con un id per tenerli traccia
+    this.clientCounter = 0;
     this.initialize();
   }
-  public initialize(): void {
+   initialize(): void {
     console.log("Inizializzazione WebSocket server");
     this.wss.on("connection", this.handleConnection.bind(this));
   }
-  private handleConnection(ws: WebSocket): void {
-    console.log("Nuova connessione WebSocket stabilita");
+  private handleConnection(ws: WebSocket, request: Request): void {
+    const clientId = ++this.clientCounter;
+    this.clients.set(clientId, {
+      ws,
+      ip: request.socket.remoteAddress,
+      connectTime: oggi
+    })
+    console.log(`Nuova connessione WebSocket stabilita, nuovo client ${clientId}, connesso da ${request.socket.remoteAddress}`);
 
     ws.on("message", (messageBuffer) => {
       try {
