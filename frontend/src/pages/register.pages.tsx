@@ -2,7 +2,7 @@
 import { FormEventHandler, useContext, useState } from "react";
 //import "./register.css";
 import { Link } from "react-router";
-import { AuthContext } from "../../context/Auth.Provider";
+import { AuthContext } from "../context/Auth.Provider";
 
 export function RegisterPages() {
   const { register } = useContext(AuthContext);
