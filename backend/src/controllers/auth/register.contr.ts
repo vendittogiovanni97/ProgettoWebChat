@@ -30,17 +30,18 @@ export const register = async (
       },
     });
     // Invia email in maniera asincrona
-    await EmailManager.getInstance().sendEmail([verifiedBody.data.email], "Benvenuto nella nostra applicazione",`<h1>Benvenuto, ti sei iscritto ${verifiedBody.data.username}</h1>`)
+    await EmailManager.getInstance().sendEmail(
+      [verifiedBody.data.email],
+      "Benvenuto nella nostra applicazione",
+      `<h1>Benvenuto, ti sei iscritto ${verifiedBody.data.username}</h1>`
+    );
 
-     response.status(200).json({
+    response.status(200).json({
       success: true,
       message: "Utente registrato con successo",
-      userId: newUser.id
-
-
-    })
+      userId: newUser.id,
+    });
     return;
-    
   } catch (error) {
     console.error(error);
     if (error === "P2002") {
@@ -51,4 +52,3 @@ export const register = async (
     }
   }
 };
-

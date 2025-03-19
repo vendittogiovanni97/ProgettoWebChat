@@ -25,7 +25,7 @@ export function LoginPages() {
         <input onChange={(e)=> setEmail(e.target.value)}type="text" name="Email" placeholder="inserisci email"/>
         <input onChange={(e)=> setPassword(e.target.value)}type="text" name="password" placeholder="inserisci password"/>
         <button onClick={handleSubmit}>Login</button>
-        <p>Se non sei registrato, <Link to="/register">registrati</Link></p>
+        <p>Se non sei registrato, <Link to="/register">Registrati</Link></p>
     </div>
   )
 } 
