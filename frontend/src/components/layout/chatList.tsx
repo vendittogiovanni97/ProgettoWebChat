@@ -25,7 +25,6 @@ const ChatList = () => {
         <AppBar position="static" color="default" elevation={0}>
           <Toolbar variant="dense"></Toolbar>
         </AppBar>
-
         <List>
           <ListItem>
             <ListItemAvatar>
