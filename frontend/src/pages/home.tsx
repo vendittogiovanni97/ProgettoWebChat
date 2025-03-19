@@ -1,11 +1,11 @@
 import ButtonAppBar from "../components/layout/header";
-import Sidebar from "../components/layout/sidebar";
+import MainLayout from "../components/layout/mainLayout";
 
 const HomePages = () => {
   return (
     <>
       <ButtonAppBar />
-      <Sidebar />
+      <MainLayout />
     </>
   );
 };

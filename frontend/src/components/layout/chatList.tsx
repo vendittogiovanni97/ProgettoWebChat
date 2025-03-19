@@ -10,9 +10,9 @@ import {
   styled,
 } from "@mui/material";
 
-const Sidebar = () => {
-  const Sidebar = styled(Box)(({ theme }) => ({
-    width: "70px",
+const ChatList = () => {
+  const ChatList = styled(Box)(({ theme }) => ({
+    width: "260px",
     paddingTop: "6px",
     height: "100vh",
     backgroundColor: theme.palette.grey[100],
@@ -21,8 +21,8 @@ const Sidebar = () => {
   }));
   return (
     <>
-      <Sidebar>
-        <AppBar position="relative" color="default" elevation={0}>
+      <ChatList>
+        <AppBar position="static" color="default" elevation={0}>
           <Toolbar variant="dense"></Toolbar>
         </AppBar>
 
@@ -31,12 +31,12 @@ const Sidebar = () => {
             <ListItemAvatar>
               <Avatar src="/path/to/avatar1.jpg" />
             </ListItemAvatar>
-            <ListItemText />
+            <ListItemText secondary="Online" />
           </ListItem>
         </List>
-      </Sidebar>
+      </ChatList>
     </>
   );
 };
 
-export default Sidebar;
+export default ChatList;
