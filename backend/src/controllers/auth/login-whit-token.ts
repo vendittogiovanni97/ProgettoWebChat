@@ -6,7 +6,7 @@ import { LoginInfo } from "../../types/infoSchema";
 import { AppError } from "../../types/errorType";
 import { responseStatus } from "../../constants/status";
 import { ErrorCodes } from "../../constants/errorCodes";
-import { NextFunction, Request, Response } from "express";
+import {  Request, Response } from "express";
 
 // Tipo per la sessione personalizzata con token
 interface TokenPayload {
