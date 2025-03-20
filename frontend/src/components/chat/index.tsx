@@ -1,16 +1,29 @@
 import Avatar from "@mui/material/Avatar";
 import Header from "./header";
+import { useTheme } from "@mui/material/styles";
 
 const ChatWindows = () => {
+  const theme = useTheme();
+
+  const styleMessage1 = theme.palette.mode === "dark" ? "#2d2d2d" : "#1a237e";
+  const styleMessage2 = theme.palette.mode === "dark" ? "#A9A9A9" : "#A9A9A9";
+  const styleBg = theme.palette.mode === "dark" ? "#DCDCDC" : "white";
+
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 pt-[8vh]">
       <Header />
-      <div className="flex flex-col flex-grow w-full bg-white shadow-xl rounded-lg overflow-hidden">
+      <div
+        className="flex flex-col flex-grow w-full shadow-xl rounded-lg overflow-hidden"
+        style={{ background: styleBg }}
+      >
         <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
           <div className="flex w-full mt-2 space-x-3 max-w-xs">
             <Avatar src="/path/to/avatar1.jpg" />
             <div>
-              <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+              <div
+                className=" p-3 rounded-r-lg rounded-bl-lg"
+                style={{ background: styleMessage2 }}
+              >
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
@@ -22,7 +35,10 @@ const ChatWindows = () => {
           </div>
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
-              <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+              <div
+                className=" text-white p-3 rounded-l-lg rounded-br-lg"
+                style={{ background: styleMessage1 }}
+              >
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod.
@@ -36,7 +52,10 @@ const ChatWindows = () => {
           </div>
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
-              <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+              <div
+                className=" text-white p-3 rounded-l-lg rounded-br-lg"
+                style={{ background: styleMessage1 }}
+              >
                 <p className="text-sm">Lorem ipsum dolor sit amet.</p>
               </div>
               <span className="text-xs text-gray-500 leading-none">
@@ -48,7 +67,10 @@ const ChatWindows = () => {
           <div className="flex w-full mt-2 space-x-3 max-w-xs">
             <Avatar src="/path/to/avatar1.jpg" />
             <div>
-              <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+              <div
+                className=" p-3 rounded-r-lg rounded-bl-lg"
+                style={{ background: styleMessage2 }}
+              >
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
@@ -61,7 +83,10 @@ const ChatWindows = () => {
           </div>
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
-              <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+              <div
+                className=" text-white p-3 rounded-l-lg rounded-br-lg"
+                style={{ background: styleMessage1 }}
+              >
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
@@ -75,7 +100,10 @@ const ChatWindows = () => {
           </div>
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
-              <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+              <div
+                className=" text-white p-3 rounded-l-lg rounded-br-lg"
+                style={{ background: styleMessage1 }}
+              >
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt.
@@ -89,7 +117,10 @@ const ChatWindows = () => {
           </div>
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
-              <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+              <div
+                className=" text-white p-3 rounded-l-lg rounded-br-lg"
+                style={{ background: styleMessage1 }}
+              >
                 <p className="text-sm">Lorem ipsum dolor sit amet.</p>
               </div>
               <span className="text-xs text-gray-500 leading-none">
@@ -101,7 +132,10 @@ const ChatWindows = () => {
           <div className="flex w-full mt-2 space-x-3 max-w-xs">
             <Avatar src="/path/to/avatar1.jpg" />
             <div>
-              <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+              <div
+                className=" p-3 rounded-r-lg rounded-bl-lg"
+                style={{ background: styleMessage2 }}
+              >
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
@@ -114,7 +148,10 @@ const ChatWindows = () => {
           </div>
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
-              <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+              <div
+                className=" text-white p-3 rounded-l-lg rounded-br-lg"
+                style={{ background: styleMessage1 }}
+              >
                 <p className="text-sm">Lorem ipsum dolor sit.</p>
               </div>
               <span className="text-xs text-gray-500 leading-none">
@@ -125,7 +162,10 @@ const ChatWindows = () => {
           </div>
         </div>
 
-        <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+        <div
+          className="flex flex-row items-center h-16 rounded-xl w-full px-4"
+          style={{ background: styleBg }}
+        >
           <div>
             <button className="flex items-center justify-center text-gray-400 hover:text-gray-600">
               <svg

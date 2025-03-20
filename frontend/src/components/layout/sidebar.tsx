@@ -8,21 +8,23 @@ import {
   ListItemText,
   Box,
   styled,
+  useTheme,
 } from "@mui/material";
 
 const Sidebar = () => {
+  const theme = useTheme();
   const Sidebar = styled(Box)(({ theme }) => ({
     width: "84px",
     paddingTop: "6px",
     height: "100vh",
-    backgroundColor: theme.palette.grey[100],
     overflowY: "auto",
     borderRight: `1px solid ${theme.palette.divider}`,
   }));
+  const styleBg = theme.palette.mode === "dark" ? "#DCDCDC" : "white";
   return (
     <>
-      <Sidebar>
-        <AppBar position="relative" color="default" elevation={0}>
+      <Sidebar sx={{ background: styleBg }}>
+        <AppBar position="relative" elevation={0}>
           <Toolbar variant="dense"></Toolbar>
         </AppBar>
 

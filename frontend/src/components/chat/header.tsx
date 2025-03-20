@@ -6,6 +6,7 @@ import {
   SvgIcon,
   Modal,
   Button,
+  useTheme,
 } from "@mui/material";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
@@ -13,6 +14,9 @@ import { useState } from "react";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const theme = useTheme();
+
+  const appBarColor = theme.palette.mode === "dark" ? "#2d2d2d" : "#1a237e";
 
   const handleClick = () => {
     setIsModalOpen(true);
@@ -22,7 +26,7 @@ const Header = () => {
     setIsModalOpen(false);
   };
   return (
-    <AppBar position="static" sx={{ background: "#696969" }}>
+    <AppBar position="static" sx={{ background: appBarColor }}>
       <Toolbar>
         <Avatar src="/path/to/avatar1.jpg" />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
