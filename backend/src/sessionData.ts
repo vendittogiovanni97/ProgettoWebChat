@@ -9,6 +9,15 @@ declare module "express-session" {
   }
 }
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
+
+
 export class SessionManager {
   private static instance: SessionManager;
   private session: Map<string, SessionData> = new Map();
