@@ -12,7 +12,7 @@ import {
 
 const Sidebar = () => {
   const Sidebar = styled(Box)(({ theme }) => ({
-    width: "70px",
+    width: "84px",
     paddingTop: "6px",
     height: "100vh",
     backgroundColor: theme.palette.grey[100],
