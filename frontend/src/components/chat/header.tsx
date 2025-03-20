@@ -1,8 +1,26 @@
-import { AppBar, Toolbar, Typography, Avatar, SvgIcon } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Avatar,
+  SvgIcon,
+  Modal,
+  Button,
+} from "@mui/material";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
+import { useState } from "react";
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <AppBar position="static">
       <Toolbar>
@@ -11,7 +29,18 @@ const Header = () => {
           Giovanni Venditto
         </Typography>
         <AddIcCallIcon sx={{ margin: 1 }} />
-        <VideoChatIcon sx={{ margin: 1 }} />
+        <VideoChatIcon
+          sx={{
+            margin: 1,
+          }}
+          onClick={handleClick}
+        />
+        <Modal open={isModalOpen} onClose={handleCloseModal}>
+          <div>
+            <h2>Avvia una videochiamata</h2>
+            <Button onClick={handleCloseModal}>Chiudi</Button>
+          </div>
+        </Modal>
         <SvgIcon>
           {/* credit: cog icon from https://heroicons.com */}
           <svg
