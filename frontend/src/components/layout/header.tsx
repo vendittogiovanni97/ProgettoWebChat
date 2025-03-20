@@ -10,7 +10,7 @@ import ToggleColorMode from "../common/toggleiconMode";
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="absolute">
+      <AppBar position="absolute" sx={{ background: "#696969" }}>
         <Toolbar>
           <IconButton
             size="large"

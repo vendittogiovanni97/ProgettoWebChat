@@ -22,7 +22,7 @@ const Header = () => {
     setIsModalOpen(false);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: "#696969" }}>
       <Toolbar>
         <Avatar src="/path/to/avatar1.jpg" />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
