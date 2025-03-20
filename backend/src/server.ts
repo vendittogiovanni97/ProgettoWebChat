@@ -10,6 +10,7 @@ import addRoutes from "./routes";
 import { WebSocketManager } from "./websocket-server";
 import { oggi } from "./configuration/time.config";
 import { errorHandler } from "./middleware/errorMiddleware";
+import 'express-async-errors';
 
 dotenv.config();
 

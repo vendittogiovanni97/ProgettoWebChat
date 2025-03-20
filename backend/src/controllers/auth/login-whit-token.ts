@@ -7,7 +7,6 @@ import { AppError } from "../../types/errorType";
 import { responseStatus } from "../../constants/status";
 import { ErrorCodes } from "../../constants/errorCodes";
 import {  Request, Response } from "express";
-
 // Tipo per la sessione personalizzata con token
 interface TokenPayload {
   Id: number;
