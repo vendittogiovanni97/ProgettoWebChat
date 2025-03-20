@@ -1,13 +1,20 @@
 import Avatar from "@mui/material/Avatar";
 import Header from "./header";
 import { useTheme } from "@mui/material/styles";
+import EmojiPicker from "emoji-picker-react";
+import { useState } from "react";
 
 const ChatWindows = () => {
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const theme = useTheme();
 
   const styleMessage1 = theme.palette.mode === "dark" ? "#2d2d2d" : "#1a237e";
   const styleMessage2 = theme.palette.mode === "dark" ? "#A9A9A9" : "#A9A9A9";
   const styleBg = theme.palette.mode === "dark" ? "#DCDCDC" : "white";
+
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+    setShowEmojiPicker(!showEmojiPicker);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 pt-[8vh]">
@@ -190,7 +197,10 @@ const ChatWindows = () => {
                 type="text"
                 className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
               />
-              <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
+              <button
+                onClick={handleClick}
+                className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
+              >
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -206,6 +216,11 @@ const ChatWindows = () => {
                   ></path>
                 </svg>
               </button>
+              {showEmojiPicker && (
+                <div className="fixed bottom-20 right-4  mt-2 z-10 opacity-90">
+                  <EmojiPicker />
+                </div>
+              )}
             </div>
           </div>
           <div className="ml-4">
