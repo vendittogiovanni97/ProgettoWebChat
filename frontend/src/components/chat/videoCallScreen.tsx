@@ -1,4 +1,5 @@
-import { Button, Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
+import CallEndIcon from "@mui/icons-material/CallEnd";
 
 interface VideoCallScreenProps {
   onClose: () => void;
@@ -8,7 +9,12 @@ interface VideoCallScreenProps {
 const VideoCallScreen = ({ onClose, stream }: VideoCallScreenProps) => {
   return (
     <Box>
-      <Typography variant="h6" component="h2" gutterBottom>
+      <Typography
+        variant="h6"
+        component="h2"
+        gutterBottom
+        sx={{ textAlign: "center" }}
+      >
         Videochiamata in corso
       </Typography>
       {stream && (
@@ -18,17 +24,27 @@ const VideoCallScreen = ({ onClose, stream }: VideoCallScreenProps) => {
           }}
           autoPlay
           muted
-          style={{ width: "100%", height: "200px", backgroundColor: "black" }}
+          style={{
+            width: "300%",
+            height: "400px",
+            backgroundColor: "black",
+            borderRadius: 15,
+          }}
         />
       )}
-      <Button
+      <IconButton
         onClick={onClose}
-        variant="contained"
-        color="primary"
-        sx={{ mt: 2 }}
+        color="secondary"
+        sx={{
+          bgcolor: "error.main",
+          color: "white",
+          p: 2,
+          left: "45%",
+          margin: 2,
+        }}
       >
-        Termina videochiamata
-      </Button>
+        <CallEndIcon />
+      </IconButton>
     </Box>
   );
 };

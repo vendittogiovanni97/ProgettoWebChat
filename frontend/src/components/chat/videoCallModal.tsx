@@ -41,10 +41,10 @@ const VideoCallModal = ({ open, onClose }: VideoCallModalProps) => {
         sx={{
           bgcolor: { background: boxColors.bg },
           position: "absolute",
-          top: "50%",
-          left: "50%",
+          top: "34%",
+          left: "60%",
           transform: "translate(-50%, -50%)",
-          width: 400,
+          width: 900,
           boxShadow: 24,
           p: 4,
           borderRadius: 2,
