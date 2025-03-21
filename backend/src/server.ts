@@ -11,6 +11,7 @@ import { WebSocketManager } from "./websocket-server";
 import { oggi } from "./configuration/time.config";
 import { errorHandler } from "./middleware/errorMiddleware";
 import 'express-async-errors';
+import { OAuth2Client } from 'google-auth-library';
 
 dotenv.config();
 
