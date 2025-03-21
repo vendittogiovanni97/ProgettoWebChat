@@ -16,6 +16,8 @@ const ChatWindows1 = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
+  //fare uno stack con box all'interno, creare un auth context per la video chiamata
+
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 pt-[7.8vh]">
       <Header />
