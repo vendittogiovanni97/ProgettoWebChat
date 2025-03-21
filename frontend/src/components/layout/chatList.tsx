@@ -10,6 +10,7 @@ import {
   styled,
   useTheme,
 } from "@mui/material";
+import { themeColors } from "../../theme/themeColor";
 
 const ChatList = () => {
   const theme = useTheme();
@@ -21,10 +22,10 @@ const ChatList = () => {
     borderRight: `1px solid ${theme.palette.divider}`,
   }));
 
-  const styleBg = theme.palette.mode === "dark" ? "#DCDCDC" : "white";
+  const styleBg = themeColors[theme.palette.mode];
   return (
     <>
-      <ChatList sx={{ background: styleBg }}>
+      <ChatList sx={{ background: styleBg.bg }}>
         <AppBar position="static" color="default" elevation={0}>
           <Toolbar variant="dense"></Toolbar>
         </AppBar>

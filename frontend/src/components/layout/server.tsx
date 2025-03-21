@@ -10,6 +10,7 @@ import {
   styled,
   useTheme,
 } from "@mui/material";
+import { themeColors } from "../../theme/themeColor";
 
 const Sidebar = () => {
   const theme = useTheme();
@@ -20,10 +21,10 @@ const Sidebar = () => {
     overflowY: "auto",
     borderRight: `1px solid ${theme.palette.divider}`,
   }));
-  const styleBg = theme.palette.mode === "dark" ? "#DCDCDC" : "white";
+  const styleBg = themeColors[theme.palette.mode];
   return (
     <>
-      <Sidebar sx={{ background: styleBg }}>
+      <Sidebar sx={{ background: styleBg.bg }}>
         <AppBar position="relative" elevation={0}>
           <Toolbar variant="dense"></Toolbar>
         </AppBar>

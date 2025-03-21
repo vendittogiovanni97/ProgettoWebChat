@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 import ChatList from "./chatList";
-import Sidebar from "./sidebar";
-import ChatWindows from "../chat";
+import Sidebar from "./server";
+import ChatWindows1 from "../chat";
 
 const MainLayout = () => {
   const Container = styled(Box)({
@@ -12,7 +12,7 @@ const MainLayout = () => {
     <Container>
       <Sidebar />
       <ChatList />
-      <ChatWindows />
+      <ChatWindows1 />
     </Container>
   );
 };

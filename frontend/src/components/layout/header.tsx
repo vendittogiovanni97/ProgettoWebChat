@@ -7,14 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ToggleColorMode from "../common/toggleiconMode";
 import { useTheme } from "@mui/material/styles";
+import { themeColors } from "../../theme/themeColor";
 
 export default function ButtonAppBar() {
   const theme = useTheme();
-  const appBarColor = theme.palette.mode === "dark" ? "#2d2d2d" : "#1a237e";
+  const appBarColor = themeColors[theme.palette.mode];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="absolute" sx={{ background: appBarColor }}>
+      <AppBar position="absolute" sx={{ background: appBarColor.headersChat }}>
         <Toolbar>
           <IconButton
             size="large"

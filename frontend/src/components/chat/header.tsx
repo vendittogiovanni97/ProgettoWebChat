@@ -4,49 +4,60 @@ import {
   Typography,
   Avatar,
   SvgIcon,
-  Modal,
-  Button,
   useTheme,
 } from "@mui/material";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import { useState } from "react";
+import { themeColors } from "../../theme/themeColor";
+import VideoCallModal from "./videoCallModal";
+import VoiceCallModal from "./voiceCallModel";
 
 const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const theme = useTheme();
 
-  const appBarColor = theme.palette.mode === "dark" ? "#2d2d2d" : "#1a237e";
+  const appBarColor = themeColors[theme.palette.mode];
 
-  const handleClick = () => {
-    setIsModalOpen(true);
+  const handleVoiceCallClick = () => {
+    setIsVoiceModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleVideoCallClick = () => {
+    setIsVideoModalOpen(true);
+  };
+
+  const handleCloseVoiceModal = () => {
+    setIsVoiceModalOpen(false);
+  };
+
+  const handleCloseVideoModal = () => {
+    setIsVideoModalOpen(false);
   };
   return (
-    <AppBar position="static" sx={{ background: appBarColor }}>
+    <AppBar position="static" sx={{ background: appBarColor.headersChat }}>
       <Toolbar>
         <Avatar src="/path/to/avatar1.jpg" />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Giovanni Venditto
         </Typography>
-        <AddIcCallIcon sx={{ margin: 1 }} />
+        <AddIcCallIcon sx={{ margin: 1 }} onClick={handleVoiceCallClick} />
+        <VoiceCallModal
+          open={isVoiceModalOpen}
+          onClose={handleCloseVoiceModal}
+        />
         <VideoChatIcon
           sx={{
             margin: 1,
           }}
-          onClick={handleClick}
+          onClick={handleVideoCallClick}
         />
-        <Modal open={isModalOpen} onClose={handleCloseModal}>
-          <div>
-            <h2>Avvia una videochiamata</h2>
-            <Button onClick={handleCloseModal}>Chiudi</Button>
-          </div>
-        </Modal>
+        <VideoCallModal
+          open={isVideoModalOpen}
+          onClose={handleCloseVideoModal}
+        />
         <SvgIcon>
-          {/* credit: cog icon from https://heroicons.com */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
