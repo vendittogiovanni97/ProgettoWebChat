@@ -5,9 +5,12 @@ import { themeColors } from "../../theme/themeColor";
 import ChatContainer from "./chatContainer";
 import MessageComponents from "./messageComponent";
 import InputBar from "./inputSend";
+import { useChatContext } from "../../context/VideoCallContext";
+import VideoCallOverlay from "./videoCallOverlay";
 
 const ChatWindows1 = () => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const { isVideoCallActive } = useChatContext();
   const theme = useTheme();
 
   const colors = themeColors[theme.palette.mode];
@@ -19,7 +22,7 @@ const ChatWindows1 = () => {
   //fare uno stack con box all'interno, creare un auth context per la video chiamata
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 pt-[7.8vh]">
+    <div className="flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 pt-[7.7vh]">
       <Header />
       <ChatContainer colors={colors}>
         <MessageComponents
@@ -70,6 +73,9 @@ const ChatWindows1 = () => {
           colors={colors}
         />
       </ChatContainer>
+
+      {/* Renderizza l'overlay solo quando la videochiamata è attiva */}
+      {isVideoCallActive && <VideoCallOverlay />}
     </div>
   );
 };
