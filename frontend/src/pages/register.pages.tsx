@@ -14,10 +14,7 @@ export function RegisterPages() {
 
     const formData = new FormData(event.currentTarget);
     const registerData = {
-      firstName: formData.get("firstname") as string,
-      lastName: formData.get("lastname") as string,
       username: formData.get("username") as string,
-      birthDate: formData.get("birthdate") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
