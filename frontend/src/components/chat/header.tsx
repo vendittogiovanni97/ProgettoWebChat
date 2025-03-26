@@ -10,12 +10,12 @@ import VideoChatIcon from "@mui/icons-material/VideoChat";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import { useState } from "react";
 import { themeColors } from "../../theme/themeColor";
-import VideoCallModal from "./videoCallModal";
 import VoiceCallModal from "./voiceCallModel";
+import { useChatContext } from "../../context/VideoCallContext";
 
 const Header = () => {
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const { startVideoCall } = useChatContext();
   const theme = useTheme();
 
   const appBarColor = themeColors[theme.palette.mode];
@@ -24,21 +24,14 @@ const Header = () => {
     setIsVoiceModalOpen(true);
   };
 
-  const handleVideoCallClick = () => {
-    setIsVideoModalOpen(true);
-  };
-
   const handleCloseVoiceModal = () => {
     setIsVoiceModalOpen(false);
   };
 
-  const handleCloseVideoModal = () => {
-    setIsVideoModalOpen(false);
-  };
   return (
     <AppBar position="static" sx={{ background: appBarColor.headersChat }}>
       <Toolbar>
-        <Avatar src="/path/to/avatar1.jpg" />
+        <Avatar src="/path/to/avatar1.jpg" sx={{ margin: 1 }} />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Giovanni Venditto
         </Typography>
@@ -51,11 +44,7 @@ const Header = () => {
           sx={{
             margin: 1,
           }}
-          onClick={handleVideoCallClick}
-        />
-        <VideoCallModal
-          open={isVideoModalOpen}
-          onClose={handleCloseVideoModal}
+          onClick={startVideoCall}
         />
         <SvgIcon>
           <svg
